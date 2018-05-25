@@ -10,7 +10,7 @@ m = length(y); % # of training examples
 X = [ones(m, 1), X]; % Add X0 coloumn
 
 alpha = 0.01;
-num_iters = 15;
+num_iters = 400;
 
 theta = zeros(dataSz, 1); % create base theta's at 0 for each feature
 

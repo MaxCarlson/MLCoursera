@@ -27,7 +27,7 @@ for iter = 1:num_iters
     step = alpha * (1/m) * diff' * X;
     
     % Apply each step to each theta value 
-    %(hopefully marching closer to minimum cost)
+    % (hopefully marching closer to minimum cost)
     theta -= step';
     
     % ============================================================
