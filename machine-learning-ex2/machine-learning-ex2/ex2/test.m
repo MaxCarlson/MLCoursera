@@ -29,3 +29,11 @@ fprintf('Expected cost (approx): 0.218\n');
 fprintf('Gradient at test theta: \n');
 fprintf(' %f \n', grad);
 fprintf('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n');
+
+
+alpha = 0.001;
+count = 15;
+
+[theta, cost] = gradient(X, y, theta, alpha, count);
+
+plot(cost);
