@@ -20,9 +20,9 @@ m = length(y); % number of training examples
 % Note: grad should have the same dimensions as theta
 %
 
-pred = sigmoid(theta' .* X);
+pred = sigmoid(X * theta);
 
-J = (-y .* log(pred) - (1 .- y) .* log(1 - pred));
+J = (1/m) * sum(-y .* log(pred) - ((1 - y) .* log(1 - pred)));
 
 
 grad = (1/m) * sum((pred - y) .* X);
