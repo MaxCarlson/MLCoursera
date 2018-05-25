@@ -7,9 +7,6 @@ function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters
 m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 
-%features = size(X, 2);
-%x = X(:,2:features);
-
 for iter = 1:num_iters
 
     % ====================== YOUR CODE HERE ======================
@@ -20,19 +17,18 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-    #{
-    for i = 1:features
-      h0(i) += theta(i) * x(i);
-    endfor
-    #}
-
+    % Get hypothesis for each X
     h0 = X * theta;
     
-    errors = h0 .- y;
+    % Find the difference between hypothesis and real 
+    diff = h0 .- y;
     
-    inc = alpha * (1/m) * errors' * X;
+    % Apply squared error func and alpha to diffs
+    step = alpha * (1/m) * diff' * X;
     
-    theta -= inc';
+    % Apply each step to each theta value 
+    %(hopefully marching closer to minimum cost)
+    theta -= step';
     
     % ============================================================
 
