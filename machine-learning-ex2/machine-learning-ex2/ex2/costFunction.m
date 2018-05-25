@@ -25,8 +25,7 @@ pred = sigmoid(theta' .* X);
 J = (-y .* log(pred) - (1 .- y) .* log(1 - pred));
 
 
-grad = sum((1/m) .* J);
-
+grad = (1/m) * sum((pred - y) .* X);
 
 
 
