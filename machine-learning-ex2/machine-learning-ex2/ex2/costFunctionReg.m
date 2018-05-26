@@ -19,6 +19,7 @@ grad = zeros(size(theta));
 
 pred = sigmoid(X * theta);
 
+% Get the cost for each feature and regularize all features aside from X0
 J = -(1/m) * (y' * log(pred) + (1 - y') * log(1 - pred) ) + (
       lambda/(2 * m) * ((theta' .* [0; ones(size(theta, 1) - 1, 1)]') * theta));
 

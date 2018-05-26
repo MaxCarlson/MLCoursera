@@ -1,18 +1,13 @@
-function [theta, cost] = gradient(X, y, theta, alpha, count)
+function [theta, cost] = gradient(X, y, theta, alpha, lambda, count)
   
-m = length(y);
-
-
-
 for i = 1:count
   
   pred = sigmoid(X * theta);
+  
+  [costi, grad] = costFunctionReg(theta, X, y, lambda);
 
-  grad = -(alpha/m) * X' * (pred - y);
-  
-  theta = theta - grad;
-  
-  cost(i) = (1/m) * sum(-y .* log(pred) - ((1 - y) .* log(1 - pred)));
+  theta -= grad;
+  cost(i) = costi;
   
 endfor
   
