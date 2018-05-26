@@ -8,11 +8,11 @@ for i = 1:count
   
   pred = sigmoid(X * theta);
 
-  grad = -(alpha/m) * X' * (pred - y)
+  grad = -(alpha/m) * X' * (pred - y);
   
-  theta = theta - grad
+  theta = theta - grad;
   
-  cost(i) = (1/m) * sum(-y .* log(pred) - ((1 - y) .* log(1 - pred)))
+  cost(i) = (1/m) * sum(-y .* log(pred) - ((1 - y) .* log(1 - pred)));
   
 endfor
   
