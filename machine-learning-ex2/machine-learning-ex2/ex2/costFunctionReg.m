@@ -19,9 +19,11 @@ grad = zeros(size(theta));
 
 pred = sigmoid(X * theta);
 
-J = -(1/m) * sum(y .* log(pred) + (1 - y) .* log(1 - pred) ) + (lambda/(2 * m)) * sum(theta .^ 2);
-     
+J = -(1/m) * (y' * log(pred) + (1 - y') * log(1 - pred) ) + (
+      lambda/(2 * m) * ((theta' .* [0; ones(size(theta, 1) - 1, 1)]') * theta));
 
+% Regularize gradient for all theta's except theta0
+grad = (1/m) * ( X' * (pred - y)) + (lambda/m) * theta .* [0; ones(size(theta, 1) - 1, 1)];
 
 % =============================================================
 
