@@ -38,13 +38,11 @@ grad = zeros(size(theta));
 
 pred = sigmoid(X * theta);
 
-J = -(1/m) * (y' * log(pred) + (1 - y') * log(1 - pred)) + (lambda/(2 * m)) * sum(theta(2:end, :) .^ 2);
+% Calculate the regularized logistic regression cost
+J = -(1/m) * (y' * log(pred) + (1 - y') * log(1 - pred)) + (
+     (lambda/(2 * m)) * sum(theta(2:end, :) .^ 2));
 
-%J =  -(1/m) * (y' * log(pred) + (1 - y') * log(1 - pred) ) + (
- %     lambda/(2 * m) * ((theta' .* [0; ones(size(theta, 1) - 1, 1)]') * theta);
+grad = (1/m) * X' * (pred - y) + (lambda/m) * [0; theta(2:end,:)];
 
-% =============================================================
-
-grad = grad(:);
 
 end
