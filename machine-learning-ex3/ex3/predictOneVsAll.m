@@ -30,10 +30,9 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-p = max(X * all_theta', [], 2);
-
-
+% find the max element, and record its row 
+%(i.e. the best prediction of its numerical value)
+[k, p] = max(X * all_theta', [], 2);
 
 
 % =========================================================================

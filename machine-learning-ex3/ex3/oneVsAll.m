@@ -57,9 +57,11 @@ for i = 1:num_labels
   
   % Build a model for each digit. 
   % (y == i) pushes y to be posative for the ith digit and negative for everything else
-  fmincg(@(t)(lrCostFunction(initTheta, X, (y == i), lambda)), initTheta, options); 
+  [initTheta] = fmincg(@(t)(lrCostFunction(t, X, (y == i), lambda)), initTheta, options); 
   
   all_theta(i, :) = initTheta;
+  
+  max(max(initTheta))
   
 endfor
 
