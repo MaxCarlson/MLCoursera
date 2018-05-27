@@ -7,16 +7,6 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   in a matrix all_theta, where the i-th row of all_theta corresponds 
 %   to the classifier for label i
 
-% Some useful variables
-m = size(X, 1);
-n = size(X, 2);
-
-% You need to return the following variables correctly 
-all_theta = zeros(num_labels, n + 1);
-
-% Add ones to the X data matrix
-X = [ones(m, 1) X];
-
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the following code to train num_labels
 %               logistic regression classifiers with regularization
@@ -49,15 +39,29 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+% Dimensions of X
+m = size(X, 1);
+n = size(X, 2);
 
+% You need to return the following variables correctly 
+all_theta = zeros(num_labels, n + 1);
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
 
+options = optimset('GradObj', 'on', 'MaxIter', 50);
 
-
-
-
-
-
+for i = 1:num_labels
+  
+  initTheta = zeros(n + 1, 1); 
+  
+  % Build a model for each digit. 
+  % (y == i) pushes y to be posative for the ith digit and negative for everything else
+  fmincg(@(t)(lrCostFunction(initTheta, X, (y == i), lambda)), initTheta, options); 
+  
+  all_theta(i, :) = initTheta;
+  
+endfor
 
 
 % =========================================================================
