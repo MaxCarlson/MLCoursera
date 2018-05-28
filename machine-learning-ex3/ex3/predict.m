@@ -10,6 +10,9 @@ num_labels = size(Theta2, 1);
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
 
+% Add the column on X0's
+X = [ones(m, 1), X];
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
 %               your learned neural network. You should set p to a 
@@ -21,13 +24,14 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+tmp = X * Theta1';
 
+% Add bias weight a0
+tmp = [ones(size(tmp, 1), 1), tmp];
 
+tmp2 = tmp * Theta2';
 
-
-
-
-
+[k, p] = max(tmp2, [], 2);
 
 % =========================================================================
 
