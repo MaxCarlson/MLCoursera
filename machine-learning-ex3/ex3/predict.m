@@ -11,7 +11,7 @@ num_labels = size(Theta2, 1);
 p = zeros(size(X, 1), 1);
 
 % Add the column on X0's
-X = [ones(m, 1), X];
+X = [ones(m, 1), X]; 
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
@@ -24,14 +24,14 @@ X = [ones(m, 1), X];
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-tmp = X * Theta1';
+a1 = sigmoid(X * Theta1');
 
 % Add bias weight a0
-tmp = [ones(size(tmp, 1), 1), tmp];
+a1 = [ones(size(a1, 1), 1), a1]; 
 
-tmp2 = tmp * Theta2';
+a2 = sigmoid(a1 * Theta2');
+[k, p] = max(a2, [], 2);
 
-[k, p] = max(tmp2, [], 2);
 
 % =========================================================================
 
