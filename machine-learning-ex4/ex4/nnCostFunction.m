@@ -63,22 +63,24 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 % Add X0
-X = [ones(m, 1), X];
+a1 = [ones(m, 1), X];
 
 % Feed forward
-a2 = sigmoid(X * Theta1');
+z2 = (a1 * Theta1');
+a2 = sigmoid(z2);
 
 % Add a20
 a2 = [ones(size(a2, 1), 1), a2];
 
-a3 = sigmoid(a2 * Theta2');
+z3 = (a2 * Theta2');
+a3 = sigmoid(z3);
 
 yVec = zeros(size(y, 1), num_labels);
 
 % Reform y into many vectors that (at the index of the correct #)
 % hold a one so yVec(i) = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] == y(i) = 4
 % This should obiously be done outside this function
-for i = 1:5000
+for i = 1:m
   yVec(i, :) = zeros(1, num_labels);
   
   if (y(i) < 10)
@@ -95,6 +97,41 @@ J = -(1/m) * sum(sum(yVec .* log(a3) + (1 - yVec) .* log(1 - a3)));
 % and vectors of theta matrix's
 J += (lambda / (2 * m)) * (sum(sum(Theta2(:, 2:end) .^ 2))...
   + sum(sum(Theta1(:, 2:end) .^ 2)));
+  
+  
+  
+% Backpropagation
+
+% TODO: Vectorized solution
+
+%size(a3) 5000x10
+%size(yVec) 5000x10
+
+d3 = a3 - yVec;
+
+%size(Theta2)
+%size(d3)
+%size(z2)
+%size((Theta2(:, 2:end))' * d3')
+
+d2 = (Theta2(:, 2:end))' * d3' .* sigmoidGradient(z2)';
+
+% look here for errors!
+Delta1 = d2 * a1;
+Delta2 = d3' * a2;
+
+Theta1_grad = (1/m)*Delta1;
+Theta2_grad = (1/m)*Delta2;
+
+%for i = 1:m
+  
+  % Get delta term for output layer
+%  d3 = (a3(i, :) - yVec(i, :));
+  
+%  d2 = ((Theta2' * d3')(2:end, :))' * sigmoidGradient(z2)';
+  
+%endfor
+  
 % -------------------------------------------------------------
 
 % =========================================================================
