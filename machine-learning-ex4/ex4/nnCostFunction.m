@@ -91,7 +91,10 @@ endfor
 
 J = -(1/m) * sum(sum(yVec .* log(a3) + (1 - yVec) .* log(1 - a3)));
 
-J += (lambda / (2 * m)) * (sum(sum(Theta2(:, 2:end) .^ 2)) + sum(sum(Theta1(:, 2:end) .^ 2)));
+% This could easily be generalized for any # of layers with a loop 
+% and vectors of theta matrix's
+J += (lambda / (2 * m)) * (sum(sum(Theta2(:, 2:end) .^ 2))...
+  + sum(sum(Theta1(:, 2:end) .^ 2)));
 % -------------------------------------------------------------
 
 % =========================================================================
