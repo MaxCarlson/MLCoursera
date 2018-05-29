@@ -77,6 +77,7 @@ yVec = zeros(size(y, 1), num_labels);
 
 % Reform y into many vectors that (at the index of the correct #)
 % hold a one so yVec(i) = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] == y(i) = 4
+% This should obiously be done outside this function
 for i = 1:5000
   yVec(i, :) = zeros(1, num_labels);
   
@@ -88,14 +89,9 @@ for i = 1:5000
   
 endfor
 
-size(yVec)
-size(a3)
-
-yVec
-
 J = -(1/m) * sum(sum(yVec .* log(a3) + (1 - yVec) .* log(1 - a3)));
 
-
+J += (lambda / (2 * m)) * (sum(sum(Theta2(:, 2:end) .^ 2)) + sum(sum(Theta1(:, 2:end) .^ 2)));
 % -------------------------------------------------------------
 
 % =========================================================================
