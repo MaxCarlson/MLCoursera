@@ -66,26 +66,34 @@ Theta2_grad = zeros(size(Theta2));
 X = [ones(m, 1), X];
 
 % Feed forward
-pred = sigmoid(X * theta);
+a2 = sigmoid(X * Theta1');
 
+% Add a20
+a2 = [ones(size(a2, 1), 1), a2];
 
+a3 = sigmoid(a2 * Theta2');
 
+yVec = zeros(size(y, 1), num_labels);
 
+% Reform y into many vectors that (at the index of the correct #)
+% hold a one so yVec(i) = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] == y(i) = 4
+for i = 1:5000
+  yVec(i, :) = zeros(1, num_labels);
+  
+  if (y(i) < 10)
+    yVec(i, y(i)) = 1;
+  else
+    yVec(i, 10) = 1;
+  endif
+  
+endfor
 
+size(yVec)
+size(a3)
 
-%J = (1/m) (-y' * log(pred) - (1 - y') * log(1 - pred));
+yVec
 
-
-
-
-
-
-
-
-
-
-
-
+J = -(1/m) * sum(sum(yVec .* log(a3) + (1 - yVec) .* log(1 - a3)));
 
 
 % -------------------------------------------------------------
