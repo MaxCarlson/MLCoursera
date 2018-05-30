@@ -99,38 +99,22 @@ J += (lambda / (2 * m)) * (sum(sum(Theta2(:, 2:end) .^ 2))...
   + sum(sum(Theta1(:, 2:end) .^ 2)));
   
   
-  
 % Backpropagation
 
-% TODO: Vectorized solution
-
-%size(a3) 5000x10
-%size(yVec) 5000x10
-
+% Output node delta
 d3 = a3 - yVec;
 
-%size(Theta2)
-%size(d3)
-%size(z2)
-%size((Theta2(:, 2:end))' * d3')
-
+% Hidden layer delta
 d2 = (Theta2(:, 2:end))' * d3' .* sigmoidGradient(z2)';
 
 % look here for errors!
 Delta1 = d2 * a1;
 Delta2 = d3' * a2;
 
+% Gradients for each theta
 Theta1_grad = (1/m)*Delta1;
 Theta2_grad = (1/m)*Delta2;
 
-%for i = 1:m
-  
-  % Get delta term for output layer
-%  d3 = (a3(i, :) - yVec(i, :));
-  
-%  d2 = ((Theta2' * d3')(2:end, :))' * sigmoidGradient(z2)';
-  
-%endfor
   
 % -------------------------------------------------------------
 

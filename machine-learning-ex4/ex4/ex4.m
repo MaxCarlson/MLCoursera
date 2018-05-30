@@ -82,7 +82,6 @@ fprintf(['Cost at parameters (loaded from ex4weights): %f '...
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 
-
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
 %  continue to implement the regularization with the cost.
@@ -183,7 +182,7 @@ fprintf('\nTraining Neural Network... \n')
 
 %  After you have completed the assignment, change the MaxIter to a larger
 %  value to see how more training helps.
-options = optimset('MaxIter', 50);
+options = optimset('MaxIter', 75);
 
 %  You should also try different values of lambda
 lambda = 1;
@@ -206,7 +205,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
                  num_labels, (hidden_layer_size + 1));
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+
 
 
 %% ================= Part 9: Visualize Weights =================
@@ -217,9 +216,10 @@ pause;
 fprintf('\nVisualizing Neural Network... \n')
 
 displayData(Theta1(:, 2:end));
+displayData(Theta2(:, 2:end));
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+
 
 %% ================= Part 10: Implement Predict =================
 %  After training the neural network, we would like to use it to predict
